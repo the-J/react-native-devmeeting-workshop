@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
 import CountersScreen from '../screens/CountersScreen'
-import SettingsScreen from '../screens/SettingsScreen'
+import MapScreen from '../screens/MapScreen'
 
 
 const config = Platform.select({
@@ -53,27 +53,31 @@ CountersStack.navigationOptions = {
 
 CountersStack.path = ''
 
-const SettingsStack = createStackNavigator(
+const MapStack = createStackNavigator(
     {
-        Settings: SettingsScreen
+        Map: MapScreen
     },
     config
 )
 
-SettingsStack.navigationOptions = {
-    tabBarLabel: 'Settings',
+MapStack.navigationOptions = {
+    tabBarLabel: 'Map',
     tabBarIcon: ( { focused } ) => (
-        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'} />
     )
 }
 
-SettingsStack.path = ''
+MapStack.path = ''
 
-const tabNavigator = createBottomTabNavigator({
+const tabNavigator = createBottomTabNavigator(
+    {
     HomeStack,
     CountersStack,
-    SettingsStack
-})
+    MapStack
+},
+    {
+        initialRouteName: 'MapStack'
+    })
 
 tabNavigator.path = ''
 
